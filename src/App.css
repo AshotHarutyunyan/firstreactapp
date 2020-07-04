@@ -1,3 +1,6 @@
+ul li {
+  list-style-type: armenian;
+}
 .App {
   text-align: center;
 }

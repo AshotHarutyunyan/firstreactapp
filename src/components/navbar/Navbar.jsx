@@ -1,0 +1,13 @@
+import React from "react";
+import classes from "./navbar.module.css";
+
+const Navbar = () =>{
+    return <nav className={classes.nav}>
+        <div><a className={`${classes.item} ${classes.active}`} href="?">Profile</a></div>
+        <div><a className="{classes.item}" href="?">Messages</a></div>
+        <div><a className="{classes.item}" href="?">News</a></div>
+        <div><a className="{classes.item}" href="?">Music</a></div>
+        <div><a className="{classes.item}" href="?">Settings</a></div>
+    </nav>
+}
+export default Navbar;

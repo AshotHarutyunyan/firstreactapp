@@ -5,10 +5,11 @@
 .dialogsItem , .massages{
     padding: 10px;
 }
-.dialogsItem .dialog{
+.dialogsItem .dialog a{
     color:#ffffff;
+    text-decoration: none;
 }
-.dialogsItem .active{
+.dialogsItem a.active{
     color: gold;
 }
 .massages .massage{

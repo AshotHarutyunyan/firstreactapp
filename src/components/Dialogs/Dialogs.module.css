@@ -1,6 +1,7 @@
 .dialogs{
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 4fr 8fr;
+    padding: 2rem;
 }
 .dialogsItem , .massages{
     padding: 10px;
@@ -9,9 +10,18 @@
     color:#ffffff;
     text-decoration: none;
 }
+.dialogsItem .dialog{
+    padding-bottom: 10px;
+}
 .dialogsItem a.active{
     color: gold;
 }
 .massages .massage{
     color: #ffffff;
+}
+.massageLeft{
+    text-align: left;
+}
+.massageRight{
+    text-align: right;
 }

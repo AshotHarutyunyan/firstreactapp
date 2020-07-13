@@ -3,7 +3,7 @@ import classes from './../Dialogs.module.css';
 
 const Massage = (props) => {
     return (
-        <div className={classes.massage}>
+        <div className={`${classes.massage} ${props.className}`}>
             {props.massage}
         </div>
     );

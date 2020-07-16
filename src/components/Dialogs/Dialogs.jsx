@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import Dialog from "./Dialog/Dialog";
 import Massage from "./Massage/Massage";
-import {createActionSandMassage, createActionWriteNewMassage} from "../../Redux/Dialogs-reducer";
 
 
 const Dialogs = (props) => {
@@ -12,10 +11,10 @@ const Dialogs = (props) => {
 
     let changeNewMassageText = (event) => {
         let text = event.target.value;
-        props.dispatch(createActionWriteNewMassage(text))
+        props.writeNewMassage(text)
     };
     let sendMassage = () => {
-        props.dispatch(createActionSandMassage())
+        props.sendMassage()
     };
 
     return (

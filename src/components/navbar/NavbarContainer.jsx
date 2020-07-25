@@ -2,14 +2,6 @@ import React from "react";
 import Navbar from "./Navbar";
 import {connect} from "react-redux";
 
-// const NavBarContainer = () => {
-//     return <StoreContext.Consumer>
-//         {   (store) => {
-//                 return <Navbar friendsData={store.getState().sideBar.friends}/>
-//             }
-//         }
-//     </StoreContext.Consumer>
-// }
 
 let mapStateToProps = (state) => {
     return {

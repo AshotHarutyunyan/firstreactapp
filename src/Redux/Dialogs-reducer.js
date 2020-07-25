@@ -30,18 +30,16 @@ let initialState = {
 export const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case WriteNewMassage:
-            console.log(state)
-            state.newMassageValue = action.text;
-            return state;
-
+            return {...state, newMassageValue: action.text};
         case sendNewMassage:
-            console.log(state)
             let newMassage = {
                 id: 5, massage: state.newMassageValue
             };
-            state.massages.push(newMassage);
-            state.newMassageValue = "";
-            return state;
+            return {
+                ...state,
+                massages: [...state.massages, newMassage],
+                newMassageValue: ""
+            };
         default:
             return state;
     }

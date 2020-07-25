@@ -1,0 +1,24 @@
+.selectedPage{
+    font-weight: bold;
+    padding: 0 5px;
+    pointer-events: none;
+}
+.unselectedPage{
+    padding: 0 5px;
+    cursor: pointer;
+}
+.pagination{
+    max-width: 250px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.user{
+    display: flex;
+    align-items: center;
+}
+.userPhoto{
+    max-width: 75px;
+}
+.btnContain{
+    text-align: center;
+}

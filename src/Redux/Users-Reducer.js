@@ -1,18 +1,23 @@
 const Set_Users_Total_Count = "Set_Users_Total_Count";
 const Set_SelectedPage = "Set_SelectedPage";
 const Set_Users = "Set_Users";
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
+const FOLLOWTEXT = "FOLLOW";
+const UNFOLLOWTEXT = "UNFOLLOW";
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const toggleFollowing = 'toggleFollowing';
 
 let initialState = {
     Users: [],
     UsersTotalCount: 0,
     PageUsersCount: 5,
-    SelectedPage:1
+    SelectedPage:1,
+    isFetching: true,
+    onFollowing: []
 };
+
 export const UsersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UNFOLLOW:
+        case UNFOLLOWTEXT:
             return {
                 ...state,
                 Users: state.Users.map( u =>  {
@@ -22,7 +27,7 @@ export const UsersReducer = (state = initialState, action) => {
                     return u;
                 })
             }
-        case FOLLOW:
+        case FOLLOWTEXT:
             return {
                 ...state,
                 Users: state.Users.map( u =>  {
@@ -39,13 +44,24 @@ export const UsersReducer = (state = initialState, action) => {
             return {...state, SelectedPage: action.SelectedPage};
         case Set_Users:
             return {...state, Users: action.users};
+        case TOGGLE_IS_FETCHING:
+            return { ...state, isFetching: action.isFetching}
+        case toggleFollowing:
+            return { ...state,
+                  onFollowing : action.toggleFollowing
+                    ? [...state.onFollowing,action.id]
+                    : state.onFollowing.filter(id => id != action.id )
+            }
         default:
             return state;
     }
 };
 
-export const  SetUsersTotalCountAc = (TotalCount) => ({type: Set_Users_Total_Count, TotalCount: TotalCount});
-export const  SetSelectedPageAc = (SelectedPage) =>  ({type: Set_SelectedPage, SelectedPage });
-export const setUsersAC = (users) => ({type: Set_Users, users });
-export const  FOLLOWAc = (userId) => ({type: FOLLOW, userId});
-export const  UNFOLLOWAc = (userId) =>  ({type: UNFOLLOW, userId});
+export const  SETTOTALCOUNT = (TotalCount) => ({type: Set_Users_Total_Count, TotalCount: TotalCount});
+export const  SetPage = (SelectedPage) =>  ({type: Set_SelectedPage, SelectedPage });
+export const SETUSERS = (users) => ({type: Set_Users, users });
+export const  FOLLOW = (userId) => ({type: FOLLOWTEXT, userId});
+export const  UNFOLLOW = (userId) =>  ({type: UNFOLLOWTEXT, userId});
+export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching })
+export const toggleIsFollowing = (toggleFollowing, id) => ({type: TOGGLE_IS_FETCHING, toggleFollowing, id })
+

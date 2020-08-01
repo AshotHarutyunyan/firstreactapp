@@ -1,5 +1,5 @@
 import React from 'react';
-import {createActionSandMassage, createActionWriteNewMassage} from "../../Redux/Dialogs-reducer";
+import {createActionSandMassage} from "../../Redux/Dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {compose} from "redux";
@@ -14,8 +14,7 @@ let mapStateToProps = (state) => {
 };
 let mapDispatchToProps = (dispatch) => {
     return {
-        sendMassage: () => { dispatch(createActionSandMassage()) },
-        writeNewMassage: (text) => { dispatch(createActionWriteNewMassage(text)) }
+        sendMassage: (value) => { dispatch(createActionSandMassage(value)) },
     }
 };
 

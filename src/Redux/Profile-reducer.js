@@ -20,8 +20,6 @@ let initialState = {
 };
 export const profileReducer = (state = initialState,action) => {
     switch (action.type){
-        case  WriteNewPost:
-            return {...state, newPostValue: action.text};
         case  setUserProfileText:
             return {...state, profileInfo: action.profileInfo};
         case  AvatarBollean:
@@ -32,20 +30,18 @@ export const profileReducer = (state = initialState,action) => {
                     return {...state, isMe: action.isMe };        
         case AddPost:
             let newPost = {
-                id: 3, massage: state.newPostValue, likes: 0
+                id: 3, massage: action.newPostValue, likes: 0
             };
             return {
                 ...state,
                 posts: [...state.posts,newPost],
-                newPostValue: ""
             }
         default:
             return state;
     }
 };
 
-export const createActionWriteNewPost = (text) => { return { type: WriteNewPost, text: text, } };
-export const createActionAddPost = () => { return { type: AddPost, } };
+export const createActionAddPost = (newPostValue) => { return { type: AddPost, newPostValue } };
 const changeAvatarBollean = (bollean) => { return { type: AvatarBollean, bollean } };
 const changeStatus = (status) => { return { type: StatusText, status } };
 const setUserProfile = (profileInfo) => { return { type: setUserProfileText, profileInfo } };
@@ -68,6 +64,7 @@ export const getStatus = (userID) => (dispatch) => {
         dispatch(changeStatus(response.data))
     });
 };
+
 export const setStatus = (status) => (dispatch) => {
     profileApi.setStatus(status).then(response => {
         if (response.data.resultCode === 0) {

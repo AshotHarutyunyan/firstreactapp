@@ -24,7 +24,7 @@ const App = (props) => {
                 <Route path="/Music" render={ () => < Music /> }/>
                 <Route path="/Settings" render={ () => < Settings /> }/>
                 <Route path="/Users" render={ () => < UsersContainer /> }/>
-                <Route path="/login" render={ () => < Login /> }/>
+                <Route path="/login" render={ () => < Login onSubmit={(values) => {console.log(values)}} /> }/>
             </div>
         </div>
     );

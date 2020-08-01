@@ -2,11 +2,11 @@ import React, {Component} from "react";
 import Users from "./Users";
 import {connect} from "react-redux";
 import { FOLLOW, GETUSERS, SetPage, SETTOTALCOUNT, toggleIsFetching, UNFOLLOW} from "../../Redux/Users-Reducer";
-import Preloader from "../preloader/preloader";
+import Preloader from "../common/preloader/preloader";
 
 class UsersApiContainer extends Component {
     componentDidMount() {
-        if(this.props.users.length == 0){
+        if(this.props.users.length === 0){
             this.props.GETUSERS(this.props.SelectedPage,this.props.PageUsersCount)
         }
     }

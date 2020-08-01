@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/ApiDatas";
+
 const Set_Users_Total_Count = "Set_Users_Total_Count";
 const Set_SelectedPage = "Set_SelectedPage";
 const Set_Users = "Set_Users";
@@ -48,7 +50,7 @@ export const UsersReducer = (state = initialState, action) => {
             return { ...state, isFetching: action.isFetching}
         case toggleFollowing:
             return { ...state,
-                  onFollowing : action.toggleFollowing
+                  onFollowing : action.toggleinFollowing
                     ? [...state.onFollowing,action.id]
                     : state.onFollowing.filter(id => id != action.id )
             }
@@ -59,9 +61,39 @@ export const UsersReducer = (state = initialState, action) => {
 
 export const  SETTOTALCOUNT = (TotalCount) => ({type: Set_Users_Total_Count, TotalCount: TotalCount});
 export const  SetPage = (SelectedPage) =>  ({type: Set_SelectedPage, SelectedPage });
-export const SETUSERS = (users) => ({type: Set_Users, users });
-export const  FOLLOW = (userId) => ({type: FOLLOWTEXT, userId});
-export const  UNFOLLOW = (userId) =>  ({type: UNFOLLOWTEXT, userId});
-export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching })
-export const toggleIsFollowing = (toggleFollowing, id) => ({type: TOGGLE_IS_FETCHING, toggleFollowing, id })
+const SETUSERS = (users) => ({type: Set_Users, users });
+const  FOLLOWAC = (userId) => ({type: FOLLOWTEXT, userId});
+const  UNFOLLOWAC = (userId) =>  ({type: UNFOLLOWTEXT, userId});
+export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching });
+const toggleIsFollowing = (toggleinFollowing, id) => ({type: toggleFollowing, toggleinFollowing, id });
+
+
+export const GETUSERS = (SelectedPage,PageUsersCount) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    dispatch(SetPage(SelectedPage));
+    usersAPI.getUsers(SelectedPage,PageUsersCount).then(data => {
+        dispatch(toggleIsFetching(false));
+        dispatch(SETUSERS(data.items));
+        dispatch(SETTOTALCOUNT(data.totalCount));
+    });
+};
+
+export const FOLLOW = (userId) => (dispatch) => {
+    dispatch(toggleIsFollowing(true, userId));
+    usersAPI.follow(userId).then(response => {
+        if (response.data.resultCode == 0) {
+            dispatch(FOLLOWAC(userId));
+        }
+        dispatch(toggleIsFollowing(false, userId));
+    });
+};
+export const UNFOLLOW = (userId) => (dispatch) => {
+    dispatch(toggleIsFollowing(true, userId));
+    usersAPI.unfollow(userId).then(response => {
+        if (response.data.resultCode == 0) {
+            dispatch(UNFOLLOWAC(userId));
+        }
+        dispatch(toggleIsFollowing(false, userId));
+    });
+};
 

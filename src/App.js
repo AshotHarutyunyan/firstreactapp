@@ -7,8 +7,9 @@ import Music from "./components/Music/Music";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavBarContainer from "./components/navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import WithUrlDataContainerComponent from "./components/profile/ProfileContainer";
+import WithUrlDataProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/headerContainer";
+import Login from "./components/Login/Login";
 
 
 const App = (props) => {
@@ -17,12 +18,13 @@ const App = (props) => {
             <HeaderContainer/>
             <NavBarContainer/>
             <div className='app-content'>
-                <Route path="/Profile/:userId?" render={ () => <WithUrlDataContainerComponent /> }/>
-                <Route path="/Dialogs" render={ () => <DialogsContainer /> }/>
-                <Route path="/News" render={ () => <News /> }/>
-                <Route path="/Music" render={ () => <Music /> }/>
-                <Route path="/Settings" render={ () => <Settings /> }/>
-                <Route path="/Users" render={ () => <UsersContainer /> }/>
+                <Route path="/Profile/:userId?" render={ () => < WithUrlDataProfileContainer /> }/>
+                <Route path="/Dialogs" render={ () => < DialogsContainer /> }/>
+                <Route path="/News" render={ () => < News /> }/>
+                <Route path="/Music" render={ () => < Music /> }/>
+                <Route path="/Settings" render={ () => < Settings /> }/>
+                <Route path="/Users" render={ () => < UsersContainer /> }/>
+                <Route path="/login" render={ () => < Login /> }/>
             </div>
         </div>
     );

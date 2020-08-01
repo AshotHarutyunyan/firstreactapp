@@ -1,58 +1,18 @@
 import React, {Component} from "react";
 import Users from "./Users";
 import {connect} from "react-redux";
-import {
-    FOLLOW,
-    SetPage,
-    SETTOTALCOUNT,
-    SETUSERS,
-    toggleIsFetching,
-    toggleIsFollowing,
-    UNFOLLOW
-} from "../../Redux/Users-Reducer";
+import { FOLLOW, GETUSERS, SetPage, SETTOTALCOUNT, toggleIsFetching, UNFOLLOW} from "../../Redux/Users-Reducer";
 import Preloader from "../preloader/preloader";
-import {usersAPI} from "../../api/ApiDatas";
 
 class UsersApiContainer extends Component {
     componentDidMount() {
         if(this.props.users.length == 0){
-            console.log('send')
-            this.props.toggleIsFetching(true);
-            usersAPI.getUsers(this.props.SelectedPage,this.props.PageUsersCount).then(data => {
-                    this.props.toggleIsFetching(false);
-                    this.props.SETUSERS(data.items);
-                    this.props.SETTOTALCOUNT(data.totalCount);
-                });
+            this.props.GETUSERS(this.props.SelectedPage,this.props.PageUsersCount)
         }
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.toggleIsFetching(true);
-        this.props.SetPage(pageNumber);
-        usersAPI.getUsers(pageNumber,this.props.PageUsersCount).then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.SETUSERS(data.items);
-            });
-    }
-
-    follow = (userId) => {
-        this.props.toggleIsFollowing(true, userId);
-        debugger
-        usersAPI.follow(userId).then(response => {
-                if (response.data.resultCode == 0) {
-                    this.props.FOLLOW(userId);
-                }
-                this.props.toggleIsFollowing(false, userId);
-            });
-    }
-    unfollow = (userId) => {
-        this.props.toggleIsFollowing(true, userId);
-        usersAPI.unfollow(userId).then(response => {
-            if (response.data.resultCode == 0) {
-                this.props.UNFOLLOW(userId);
-            }
-            this.props.toggleIsFollowing(false, userId);
-        });
+        this.props.GETUSERS(pageNumber,this.props.PageUsersCount)
     }
 
     render() {
@@ -63,8 +23,8 @@ class UsersApiContainer extends Component {
                    SelectedPage={this.props.SelectedPage}
                    onPageChanged={this.onPageChanged}
                    users={this.props.users}
-                   FOLLOW={this.follow}
-                   UNFOLLOW={this.unfollow}
+                   FOLLOW={this.props.FOLLOW}
+                   UNFOLLOW={this.props.UNFOLLOW}
                    followingInProgress = {this.props.onFollowing}
             />
         </>
@@ -84,7 +44,7 @@ let mapStateToProps = (state) => {
 };
 
 const UsersContainer = connect(mapStateToProps,{
-    FOLLOW,UNFOLLOW,SETUSERS,SETTOTALCOUNT,SetPage,toggleIsFetching,toggleIsFollowing
+    FOLLOW,UNFOLLOW,SETTOTALCOUNT,SetPage,toggleIsFetching,GETUSERS
 })(UsersApiContainer);
 
 export default UsersContainer;

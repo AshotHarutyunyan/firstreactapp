@@ -7,3 +7,6 @@
 .profileInfo{
     padding:10px;
 }
+.avatarImg img{
+    max-width: 400px;
+}

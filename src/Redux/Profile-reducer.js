@@ -1,7 +1,6 @@
 import {usersAPI, profileApi} from "../api/ApiDatas";
 
 const AddPost = 'AddPost';
-const WriteNewPost = 'WriteNewPost';
 const setUserProfileText = 'setUserProfile';
 const AvatarBollean = 'AvatarBollean';
 const StatusText = 'changeStatus';

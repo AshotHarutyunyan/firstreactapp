@@ -22,7 +22,7 @@ NewMassageForm = reduxForm({
 
 const Dialogs = (props) => {
     let dialogsElements = props.dialogsData.dialogs.map(p => <Dialog name={p.name} id={p.id} key={p.id} />);
-    let massagesElements = props.dialogsData.massages.map(m => <Massage key={m.id} massage={m.massage} className={m.id % 2 == 0 ? classes.massageRight : classes.massageLeft} />);
+    let massagesElements = props.dialogsData.massages.map(m => <Massage key={m.id} massage={m.massage} className={m.id % 2 === 0 ? classes.massageRight : classes.massageLeft} />);
     let sendMassage = (values) => {
         props.sendMassage(values.NewMassageText)
     };

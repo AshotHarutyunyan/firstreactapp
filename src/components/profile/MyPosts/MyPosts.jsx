@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, reset } from "redux-form";
 import { Textarea } from "../../common/form/FormControl";
 import { required } from "../../FormValidations/formValidation";
 
@@ -25,8 +25,9 @@ NewPostForm = reduxForm({
 const MyPosts = (props) => {
     let postsElements = props.postsData.posts.map(post => <Post message={post.massage} liks={post.likes} key={post.id} />);
 
-    let addPost = (values) => {
+    let addPost = (values,dispatch) => {
         props.addNewPost(values.newPostText);
+        dispatch(reset("newPostForm"));
     }
 
     return (

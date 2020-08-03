@@ -6,6 +6,7 @@ import {UsersReducer} from "./Users-Reducer";
 import authReducer from "./Auth-reducer";
 import thunk from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
+import appReducer from "./App-reducer";
 
 let reducers = combineReducers({
     dialogsPage:dialogsReducer,
@@ -13,11 +14,12 @@ let reducers = combineReducers({
     sideBar:sidebarReducer,
     UsersPage:UsersReducer,
     auth: authReducer,
+    app: appReducer,
     form: formReducer
 })
 
 let Store = createStore(reducers,applyMiddleware(thunk));
 
-window.state = Store.getState();
+window.store = Store;
 
 export default Store;

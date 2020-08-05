@@ -3,6 +3,7 @@ import Users from "./Users";
 import {connect} from "react-redux";
 import { FOLLOW, GETUSERS, SetPage, SETTOTALCOUNT, toggleIsFetching, UNFOLLOW} from "../../Redux/Users-Reducer";
 import Preloader from "../common/preloader/preloader";
+import { getUsers, getUsersTotalCountSl, getPageUsersCountSl, getSelectedPageSl, getonFollowingSl, getisFetchingSl } from "../Selectors/Selectors";
 
 class UsersApiContainer extends Component {
     componentDidMount() {
@@ -34,12 +35,12 @@ class UsersApiContainer extends Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.UsersPage.Users,
-        UsersTotalCount: state.UsersPage.UsersTotalCount,
-        PageUsersCount: state.UsersPage.PageUsersCount,
-        SelectedPage: state.UsersPage.SelectedPage,
-        onFollowing: state.UsersPage.onFollowing,
-        isFetching: state.UsersPage.isFetching
+        users: getUsers(state),
+        UsersTotalCount: getUsersTotalCountSl(state),
+        PageUsersCount: getPageUsersCountSl(state),
+        SelectedPage: getSelectedPageSl(state),
+        onFollowing: getonFollowingSl(state),
+        isFetching: getisFetchingSl(state)
     }
 };
 
